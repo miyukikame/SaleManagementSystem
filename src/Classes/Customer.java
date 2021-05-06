@@ -1,3 +1,5 @@
+package Classes;
+
 public class Customer {
     private String name,surname,email;
 

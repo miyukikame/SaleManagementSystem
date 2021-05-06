@@ -1,10 +1,12 @@
+package Classes;
+
 public class Product {
     private String name, description;
     private double price;
     private int stock;
 
     //region constructor
-    Product(String name, String description, double price, int stock){
+    public Product(String name, String description, double price, int stock){
         this.name = name;
         this.price = price;
         this.description = description;
