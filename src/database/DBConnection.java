@@ -1,19 +1,19 @@
 package database;
 import java.sql.*;
+import java.util.Date;
 
 public class DBConnection {
-    private static Connection conn = null;
 
     public static Connection connectDB()
     {
         try{
-            conn=DriverManager.getConnection("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11410637", "sql11410637", "fQsr1VHqbJ");
-            return conn;
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/pe_2021", "root", "sdasdasda");
         }
         catch(SQLException ex){
             ex.printStackTrace();
             return null;
         }
     }
+
 
 }

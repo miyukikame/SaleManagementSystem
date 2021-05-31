@@ -9,25 +9,26 @@ public class ProductService {
     public ProductService(){
     }
     //füllt im Produkt Objekt den Array mit Produkten von der Datenbank auf
-    public void fillArray(Products products) throws SQLException {
+    public void fillArray(Products products, int type) throws SQLException {
         Statement myStatement = myConn.createStatement();
         products.getProducts().clear();
-        ResultSet myResult = myStatement.executeQuery("select * from products");
+        ResultSet myResult = myStatement.executeQuery("select * from PRODUCTS WHERE Type = " + type);
         // Process the result
         while(myResult.next()){
-            products.getProducts().add(new Product(myResult.getString("product_name"),myResult.getString("product_description"),
-                    myResult.getDouble("product_price"),myResult.getInt("product_stock")));
+            products.getProducts().add(new Product(myResult.getString("Name"),myResult.getString("Description"),
+                    myResult.getDouble("Price"),myResult.getInt("Quantity")));
         }
     }
     //fügt der Datenbank ein neues Produkt hinzu
     public void addProductToDatabase(Product product) throws SQLException {
         //inserts a new product into the database
-        String sql = "INSERT INTO products(product_name,product_description,product_price,product_stock)VALUES(?,?,?,?)";
+        String sql = "INSERT INTO PRODUCTS(Name,Description,Price,Quantity,Type)VALUES(?,?,?,?,?)";
         PreparedStatement statement = myConn.prepareStatement(sql);
         statement.setString(1,product.getName());
         statement.setString(2,product.getDescription());
         statement.setDouble(3,product.getPrice());
         statement.setInt(4,product.getStock());
+        statement.setInt(5,product.getType());
         statement.executeUpdate();
         //todo refresh gui after adding new product
     }
