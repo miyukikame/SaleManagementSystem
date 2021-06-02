@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author nikoa
@@ -40,8 +42,28 @@ public class Mainpage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
         jButton2.setText("Eat");
+        jButton2.addActionListener(actionEvent -> {
+            dispose();
+            Victuals test = null;
+            try {
+                test = new Victuals();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            test.setLocationRelativeTo(null);
+        });
 
         jButton3.setText("Clothes");
+        jButton3.addActionListener(actionEvent -> {
+            dispose();
+            Clothes test = null;
+            try {
+                test = new Clothes();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            test.setLocationRelativeTo(null);
+        });
 
         jButton4.setText("Technology");
 
@@ -110,6 +132,8 @@ public class Mainpage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

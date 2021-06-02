@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import Classes.Products;
+import GUI.Helper.*;
+
 import javax.swing.*;
 import java.sql.SQLException;
 
@@ -13,13 +14,11 @@ import java.sql.SQLException;
  *
  * @author nikoa
  */
-public class Clothes extends GUI.Helper.Products {
+public class Victuals extends Products {
+
     /**
-     * Creates new form Clothes
+     * Creates new form Drink
      */
-    public Clothes() throws SQLException {
+    public Victuals() throws SQLException {
     }
-
-    // End of variables declaration//GEN-END:variables
 }
-

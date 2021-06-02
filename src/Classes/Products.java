@@ -9,8 +9,12 @@ public class Products {
     private final ArrayList<Product> products = new ArrayList<>();
 
     //füllt beim erstellen eines Objekt automatisch die Arraylist auf
-    public Products(int type) throws SQLException {
-        productsDatabase.fillArray(this, type);
+    public Products(String type) throws SQLException {
+        switch (type) {
+            case "Clothes"-> productsDatabase.fillArray(this, 1);
+            case "Victuals" -> productsDatabase.fillArray(this, 2);
+            case "Technology" -> productsDatabase.fillArray(this, 3);
+        }
     }
     //fügt ein Produkt der Datenbank hinzu und aktualisiert die ArrayList mit dem neuen Produkt
     public void addProduct(Product product) throws SQLException {
