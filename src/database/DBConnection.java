@@ -3,7 +3,10 @@ import java.sql.*;
 import java.util.Date;
 
 public class DBConnection {
-
+    /**
+     * tries to connect to the databse
+     * @return the connector
+     */
     public static Connection connectDB()
     {
         try{

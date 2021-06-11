@@ -11,6 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Products extends javax.swing.JFrame{
+    /**
+     *
+     * @throws SQLException
+     */
     public Products() throws SQLException {
         //region variable declaration
         Classes.Products products;
@@ -43,7 +47,7 @@ public class Products extends javax.swing.JFrame{
             int finalI = i;
             itemQuantity.get(i).addItemListener(itemEvent -> {
                 if(itemEvent.getStateChange() == ItemEvent.SELECTED){
-                    Cart.currentPrice = calculatePrice(itemQuantity, products);
+                    Cart.currentPrice = Cart.calculatePrice(itemQuantity, products);
                     System.out.println("The current price is: " + Cart.currentPrice);
                 }
             });
@@ -110,32 +114,20 @@ public class Products extends javax.swing.JFrame{
      * Creates new form Clothes
      */
     public static void main(String[] args) throws SQLException {
-        /*java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new Products().setVisible(true);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });*/
     }
 
+    /**
+     *
+     */
     @Override
     public void dispose() {
-        Cart.totalprice += Cart.currentPrice;
-        System.out.println("Your total price is: " + Cart.totalprice);
+        Cart.totalPrice += Cart.currentPrice;
+        System.out.println("Your total price is: " + Cart.totalPrice);
         System.out.println("Your current price is: " + Cart.currentPrice);
         super.dispose();
     }
 
-    private double calculatePrice(ArrayList<JComboBox> prices, Classes.Products products){
-        double tempPrice = 0;
-        int i = 0;
-        for (JComboBox quantity:
-             prices) {
-            tempPrice += quantity.getSelectedIndex() * products.getProducts().get(i).getPrice();
-            i++;
-        }
-        return tempPrice;
-    }
+
+
 
 }
