@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import GUI.Helper.GuiGeneration;
+import GUI.Helper.FrameGen;
 
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author nikoa
  */
-public class Clothes extends GuiGeneration {
+public class Clothes extends FrameGen {
     /**
      * Creates new form Clothes
      */

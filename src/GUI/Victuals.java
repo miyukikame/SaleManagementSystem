@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author nikoa
  */
-public class Victuals extends GuiGeneration {
+public class Victuals extends FrameGen {
 
     /**
      * Creates new form Drink

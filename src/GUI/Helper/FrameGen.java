@@ -10,12 +10,12 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GuiGeneration extends javax.swing.JFrame{
+public class FrameGen extends javax.swing.JFrame{
     /**
      *
      * @throws SQLException
      */
-    public GuiGeneration() throws SQLException {
+    public FrameGen() throws SQLException {
         //region variable declaration
         Classes.Products products;
         ArrayList<JLabel> itemName = new ArrayList<>();
