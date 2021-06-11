@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import GUI.Helper.Products;
+import GUI.Helper.GuiGeneration;
 
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author nikoa
  */
-public class Technology extends Products {
+public class Technology extends GuiGeneration {
 
     /**
      * Creates new form Technology

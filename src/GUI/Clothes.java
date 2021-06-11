@@ -5,15 +5,15 @@
  */
 package GUI;
 
-import Classes.Products;
-import javax.swing.*;
+import GUI.Helper.GuiGeneration;
+
 import java.sql.SQLException;
 
 /**
  *
  * @author nikoa
  */
-public class Clothes extends GUI.Helper.Products {
+public class Clothes extends GuiGeneration {
     /**
      * Creates new form Clothes
      */

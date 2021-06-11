@@ -1,6 +1,6 @@
 package Classes;
 
-import database.ProductService;
+import Database.ProductService;
 import java.sql.*;
 import java.util.ArrayList;
 

@@ -7,14 +7,13 @@ package GUI;
 
 import GUI.Helper.*;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
 /**
  *
  * @author nikoa
  */
-public class Victuals extends Products {
+public class Victuals extends GuiGeneration {
 
     /**
      * Creates new form Drink

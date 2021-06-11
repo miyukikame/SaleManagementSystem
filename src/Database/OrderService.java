@@ -1,4 +1,4 @@
-package database;
+package Database;
 
 public class OrderService {
 }
