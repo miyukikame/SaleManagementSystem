@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Helper.ProductFrameGen;
+
 import java.sql.SQLException;
 
 /**
@@ -44,30 +46,35 @@ public class Mainpage extends javax.swing.JFrame {
         jButton2.setText("Eat");
         jButton2.addActionListener(actionEvent -> {
             dispose();
-            Victuals test = null;
+            ProductFrameGen victuals = null;
             try {
-                test = new Victuals();
+                victuals = new ProductFrameGen("Victuals");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            test.setLocationRelativeTo(null);
+            victuals.setLocationRelativeTo(null);
         });
 
         jButton3.setText("Clothes");
         jButton3.addActionListener(actionEvent -> {
             dispose();
-            Clothes test = null;
+            ProductFrameGen clothes = null;
             try {
-                test = new Clothes();
+                clothes = new ProductFrameGen("Clothes");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            test.setLocationRelativeTo(null);
+            clothes.setLocationRelativeTo(null);
         });
 
         jButton4.setText("Technology");
 
-        jButton1.setText("Go to Order");
+        jButton1.setText("Go to your Cart");
+        jButton1.addActionListener(actionEvent -> {
+            dispose();
+            OrderCart cart = new OrderCart();
+            cart.setLocationRelativeTo(null);
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

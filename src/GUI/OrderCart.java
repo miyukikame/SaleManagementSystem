@@ -1,30 +1,31 @@
-package GUI.Helper;
+package GUI;
 
-
-import GUI.Mainpage;
+import Classes.Product;
+import Helper.Cart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FrameGen extends javax.swing.JFrame{
+public class OrderCart extends javax.swing.JFrame{
     /**
      *
      * @throws SQLException
      */
-    public FrameGen() throws SQLException {
+    public OrderCart(){
         //region variable declaration
-        Classes.Products products;
         ArrayList<JLabel> itemName = new ArrayList<>();
         ArrayList<JLabel> itemPrice = new ArrayList<>();
-        ArrayList<JComboBox> itemQuantity = new ArrayList<>();
-        JLabel itemSection = new JLabel(getClass().getSimpleName());
+        ArrayList<JLabel> itemQuantity = new ArrayList<>();
+        ArrayList<JButton> removeProduct = new ArrayList<>();
+        JLabel itemSection = new JLabel("Cart");
+        JLabel productName = new JLabel("Name");
+        JLabel productPrice = new JLabel("Price");
+        JLabel productQuantity = new JLabel("Quantity");
         JButton mainPage = new JButton("Mainpage");
-        final double tempPrice = 0;
-        JButton cart = new JButton("Go to Cart");
+        JButton cart = new JButton("Order");
         itemSection.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         mainPage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -33,28 +34,29 @@ public class FrameGen extends javax.swing.JFrame{
             Mainpage test = new Mainpage();
             test.setLocationRelativeTo(null);
         });
-
-        products = new Classes.Products(getClass().getSimpleName());
-        for (int i = 0; i < products.getProducts().size(); i ++) {
-            itemName.add(new JLabel());
-            itemName.get(i).setFont(new java.awt.Font("Tahoma", 1, 14));
-            itemName.get(i).setText(products.getProducts().get(i).getName());
-            itemPrice.add(new JLabel());
-            itemPrice.get(i).setFont(new java.awt.Font("Tahoma", 1, 14));
-            itemPrice.get(i).setText(products.getProducts().get(i).getPriceFormatted());
-            itemQuantity.add(new JComboBox());
-            itemQuantity.get(i).setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
-            int finalI = i;
-            itemQuantity.get(i).addItemListener(itemEvent -> {
-                if(itemEvent.getStateChange() == ItemEvent.SELECTED){
-                    Cart.currentPrice = Cart.calculatePrice(itemQuantity, products);
-                    System.out.println("The current price is: " + Cart.currentPrice);
-                }
-            });
+        if(Cart.cartProducts!=null) {
+            for (Product test :
+                    Cart.cartProducts) {
+                removeProduct.add(new JButton("x"));
+                itemName.add(new JLabel(test.getName()));
+                itemPrice.add(new JLabel(test.getPriceFormatted()));
+            }
+            for (int quantityInt :
+                    Cart.cartProductQuantity) {
+                JLabel quantity = new JLabel();
+                quantity.setText(String.valueOf(quantityInt));
+                itemQuantity.add(quantity);
+            }
         }
         //endregion
-
-        //JPanel frame = new JPanel();
+        for (int i = 0; i < removeProduct.size(); i++) {
+            int finalI = i;
+            removeProduct.get(i).addActionListener(actionEvent -> {
+                Cart.removeProductFromCart(finalI);
+                dispose();
+                new OrderCart();
+            });
+        }
         getContentPane().setBackground(Color.GREEN);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         getContentPane().setLayout(groupLayout);
@@ -63,31 +65,44 @@ public class FrameGen extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         GroupLayout.ParallelGroup itemCollection = groupLayout.createParallelGroup();
+        itemCollection.addComponent(productName);
         for (JLabel test :
                 itemName) {
             itemCollection.addComponent(test);
 
         }
         GroupLayout.ParallelGroup priceCollection = groupLayout.createParallelGroup();
+        priceCollection.addComponent(productPrice);
         for (JLabel test :
                 itemPrice) {
             priceCollection.addComponent(test);
 
         }
         GroupLayout.ParallelGroup quantityCollection = groupLayout.createParallelGroup();
-        for (JComboBox test :
+        quantityCollection.addComponent(productQuantity);
+        for (JLabel test :
                 itemQuantity) {
             quantityCollection.addComponent(test);
 
         }
+        GroupLayout.ParallelGroup removeButtonCollection = groupLayout.createParallelGroup();
+        for (JButton test :
+                removeProduct) {
+            removeButtonCollection.addComponent(test);
+        }
 
         GroupLayout.SequentialGroup verticalGroup = groupLayout.createSequentialGroup();
         verticalGroup.addComponent(itemSection);
+        verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(productName)
+                .addComponent(productPrice)
+                .addComponent(productQuantity));
         for (int i = 0; i < itemPrice.size(); i++) {
             verticalGroup.addGroup(groupLayout.createParallelGroup()
                     .addComponent(itemName.get(i))
                     .addComponent(itemPrice.get(i))
-                    .addComponent(itemQuantity.get(i)));
+                    .addComponent(itemQuantity.get(i))
+                    .addComponent(removeProduct.get(i)));
         }
         verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(mainPage)
@@ -98,7 +113,8 @@ public class FrameGen extends javax.swing.JFrame{
                         .addGroup(itemCollection.addComponent(mainPage))
                         .addComponent(itemSection)
                         .addGroup(priceCollection)
-                        .addGroup(quantityCollection
+                        .addGroup(quantityCollection)
+                        .addGroup(removeButtonCollection
                                 .addComponent(cart))
         );
         groupLayout.setVerticalGroup(
@@ -126,6 +142,7 @@ public class FrameGen extends javax.swing.JFrame{
         System.out.println("Your current price is: " + Cart.currentPrice);
         super.dispose();
     }
+
 
 
 
