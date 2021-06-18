@@ -17,11 +17,10 @@ public class ProductService {
     public void fillArray(Products products, int product_type) throws SQLException {
         Statement myStatement = myConn.createStatement();
         products.getProducts().clear();
-        ResultSet myResult = myStatement.executeQuery("select * from PRODUCTS WHERE Type = " + product_type);
+        ResultSet myResult = myStatement.executeQuery("select * from PRODUCT WHERE category_id = " + product_type);
         // Process the result
         while(myResult.next()){
-            products.getProducts().add(new Product(myResult.getString("Name"),myResult.getString("Description"),
-                    myResult.getDouble("Price"),myResult.getInt("Quantity")));
+            products.getProducts().add(new Product(myResult.getString("Name"),myResult.getDouble("Price"),myResult.getInt("Quantity"), myResult.getInt("category_id")));
         }
     }
     /**
@@ -31,14 +30,12 @@ public class ProductService {
      */
     public void addProductToDatabase(Product product) throws SQLException {
         //inserts a new product into the database
-        String sql = "INSERT INTO PRODUCTS(Name,Description,Price,Quantity,Type)VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO PRODUCT(Name,Price,Quantity,Type)VALUES(?,?,?,?)";
         PreparedStatement statement = myConn.prepareStatement(sql);
         statement.setString(1,product.getName());
-        statement.setString(2,product.getDescription());
-        statement.setDouble(3,product.getPrice());
-        statement.setInt(4,product.getStock());
-        statement.setInt(5,product.getType());
+        statement.setDouble(2,product.getPrice());
+        statement.setInt(3,product.getStock());
+        statement.setInt(4,product.getType());
         statement.executeUpdate();
-        //todo refresh gui after adding new product
     }
 }

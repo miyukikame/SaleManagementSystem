@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 class Main {
     public static void main(String[] args) throws SQLException {
-           Mainpage test = new Mainpage();
+        Login test = new Login();
+        test.setVisible(true);
     }
 }

@@ -1,23 +1,20 @@
 package Classes;
 public class Product {
-    private String name, description;
+    private String name;
     private double price;
-    private int stock;
-    private int type;
+    private int stock,type;
     //region constructor
 
     /**
      * constructor which assigns values to the product variables
      * @param name
-     * @param description
      * @param price
      * @param stock
      * @param type
      */
-    public Product(String name, String description, double price, int stock, int type){
+    public Product(String name, double price, int stock, int type){
         this.name = name;
         this.price = price;
-        this.description = description;
         this.stock = stock;
         this.type = type;
     }
@@ -25,14 +22,12 @@ public class Product {
     /**
      *
      * @param name
-     * @param description
      * @param price
      * @param stock
      */
-    public Product(String name, String description, double price, int stock){
+    public Product(String name, double price, int stock){
         this.name = name;
         this.price = price;
-        this.description = description;
         this.stock = stock;
     }
     //endregion
@@ -59,14 +54,6 @@ public class Product {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * returns the description
-     * @return product description
-     */
-    public String getDescription() {
-        return description;
     }
 
     /**
@@ -99,14 +86,6 @@ public class Product {
      */
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    /**
-     * sets the product description
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**
