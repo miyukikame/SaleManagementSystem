@@ -22,8 +22,10 @@ public class ProductFrameGen extends javax.swing.JFrame{
         ArrayList<JLabel> itemPrice = new ArrayList<>();
         ArrayList<JComboBox> itemQuantity = new ArrayList<>();
         JLabel itemSection = new JLabel(guiName);
+        JLabel cartTotalPriceText = new JLabel("Total Price");
         JButton mainPage = new JButton("Mainpage");
         JButton cart = new JButton("Add to Cart");
+        JTextField cartTotalPrice = new JTextField();
         cart.addActionListener(actionEvent -> {
             for (int i = 0; i < itemName.size(); i++) {
                 if(itemQuantity.get(i).getSelectedIndex() != 0){
@@ -34,9 +36,12 @@ public class ProductFrameGen extends javax.swing.JFrame{
             System.out.println("Your total price is: " + Cart.totalPrice);
             JOptionPane.showMessageDialog(null, "Your products got added to the cart");
         });
-        itemSection.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        mainPage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        itemSection.setFont(new java.awt.Font("Tahoma", 1, 18));
+        mainPage.setFont(new java.awt.Font("Tahoma", 1, 14));
+        cart.setFont(new java.awt.Font("Tahoma", 1, 14));
+        cartTotalPriceText.setFont(new java.awt.Font("Tahoma", 1, 14));
+        cartTotalPrice.setEditable(false);
+        cartTotalPrice.setText(Cart.currentPrice + "$");
         mainPage.addActionListener(actionEvent -> {
             dispose();
             Mainpage test = new Mainpage();
@@ -56,6 +61,7 @@ public class ProductFrameGen extends javax.swing.JFrame{
             itemQuantity.get(i).addItemListener(itemEvent -> {
                 if(itemEvent.getStateChange() == ItemEvent.SELECTED){
                     Cart.currentPrice = Cart.calculatePrice(itemQuantity, products);
+                    cartTotalPrice.setText(Cart.currentPrice + "$");
                     System.out.println("The current price is: " + Cart.currentPrice);
                 }
             });
@@ -99,6 +105,9 @@ public class ProductFrameGen extends javax.swing.JFrame{
                     .addComponent(itemQuantity.get(i)));
         }
         verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(cartTotalPriceText)
+                .addComponent(cartTotalPrice));
+        verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(mainPage)
                 .addComponent(cart));
 
@@ -106,8 +115,10 @@ public class ProductFrameGen extends javax.swing.JFrame{
                 groupLayout.createSequentialGroup()
                         .addGroup(itemCollection.addComponent(mainPage))
                         .addComponent(itemSection)
-                        .addGroup(priceCollection)
+                        .addGroup(priceCollection
+                                .addComponent(cartTotalPriceText))
                         .addGroup(quantityCollection
+                                .addComponent(cartTotalPrice)
                                 .addComponent(cart))
         );
         groupLayout.setVerticalGroup(
