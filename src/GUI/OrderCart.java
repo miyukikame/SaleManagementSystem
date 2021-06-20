@@ -38,7 +38,7 @@ public class OrderCart extends javax.swing.JFrame{
             test.setLocationRelativeTo(null);
         });
         cartTotalPrice.setEditable(false);
-        cartTotalPrice.setText(Cart.currentPrice + "$");
+        cartTotalPrice.setText(Cart.totalPrice + "$");
         if(Cart.cartProducts!=null) {
             for (Product test :
                     Cart.cartProducts) {
