@@ -30,6 +30,8 @@ public class ProductFrameGen extends javax.swing.JFrame{
                     Cart.addProductToCart(products.getProducts().get(i), itemQuantity.get(i).getSelectedIndex());
                 }
             }
+            Cart.totalPrice += Cart.currentPrice;
+            System.out.println("Your total price is: " + Cart.totalPrice);
             JOptionPane.showMessageDialog(null, "Your products got added to the cart");
         });
         itemSection.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -53,7 +55,7 @@ public class ProductFrameGen extends javax.swing.JFrame{
             int finalI = i;
             itemQuantity.get(i).addItemListener(itemEvent -> {
                 if(itemEvent.getStateChange() == ItemEvent.SELECTED){
-                    Cart.currentPrice = (float) Cart.calculatePrice(itemQuantity, products);
+                    Cart.currentPrice = Cart.calculatePrice(itemQuantity, products);
                     System.out.println("The current price is: " + Cart.currentPrice);
                 }
             });
@@ -128,9 +130,7 @@ public class ProductFrameGen extends javax.swing.JFrame{
      */
     @Override
     public void dispose() {
-        Cart.totalPrice += Cart.currentPrice;
         System.out.println("Your total price is: " + Cart.totalPrice);
-        System.out.println("Your current price is: " + Cart.currentPrice);
         Cart.currentPrice = 0;
         super.dispose();
     }

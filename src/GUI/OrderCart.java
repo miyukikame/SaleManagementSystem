@@ -24,16 +24,21 @@ public class OrderCart extends javax.swing.JFrame{
         JLabel productName = new JLabel("Name");
         JLabel productPrice = new JLabel("Price");
         JLabel productQuantity = new JLabel("Quantity");
+        JLabel cartTotalPriceText = new JLabel("Total Price");
+        JTextField cartTotalPrice = new JTextField();
         JButton mainPage = new JButton("Mainpage");
         JButton cart = new JButton("Order");
         itemSection.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         mainPage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cartTotalPriceText.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mainPage.addActionListener(actionEvent -> {
             dispose();
             Mainpage test = new Mainpage();
             test.setLocationRelativeTo(null);
         });
+        cartTotalPrice.setEditable(false);
+        cartTotalPrice.setText(String.valueOf(Cart.totalPrice) + "$");
         if(Cart.cartProducts!=null) {
             for (Product test :
                     Cart.cartProducts) {
@@ -105,6 +110,9 @@ public class OrderCart extends javax.swing.JFrame{
                     .addComponent(removeProduct.get(i)));
         }
         verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(cartTotalPriceText)
+                .addComponent(cartTotalPrice));
+        verticalGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(mainPage)
                 .addComponent(cart));
 
@@ -113,8 +121,10 @@ public class OrderCart extends javax.swing.JFrame{
                         .addGroup(itemCollection.addComponent(mainPage))
                         .addComponent(itemSection)
                         .addGroup(priceCollection)
-                        .addGroup(quantityCollection)
+                        .addGroup(quantityCollection
+                                .addComponent(cartTotalPriceText))
                         .addGroup(removeButtonCollection
+                                .addComponent(cartTotalPrice)
                                 .addComponent(cart))
         );
         groupLayout.setVerticalGroup(
@@ -137,9 +147,7 @@ public class OrderCart extends javax.swing.JFrame{
      */
     @Override
     public void dispose() {
-        Cart.totalPrice += Cart.currentPrice;
         System.out.println("Your total price is: " + Cart.totalPrice);
-        System.out.println("Your current price is: " + Cart.currentPrice);
         super.dispose();
     }
 
