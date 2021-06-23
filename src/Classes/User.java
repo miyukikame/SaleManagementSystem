@@ -2,12 +2,13 @@ package Classes;
 
 public class User {
     private int id;
-    private String firstName, lastName, email, password;
+    private String firstName, lastName, username, email, password;
 
-    public User(int id, String firstName, String lastName, String email, String password) {
+    public User(int id, String firstName, String lastName, String username, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.email = email;
         this.password = password;
     }

@@ -5,14 +5,13 @@ import Helper.Cart;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderCart extends javax.swing.JFrame{
     /**
      *
-     * @throws SQLException
+     *
      */
     public OrderCart(){
         //region variable declaration
@@ -139,7 +138,7 @@ public class OrderCart extends javax.swing.JFrame{
     /**
      * Creates new form Clothes
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
     }
 
     /**

@@ -1,7 +1,7 @@
 package Helper;
 
 
-import Classes.Product;
+import Database.ProductService;
 import GUI.Mainpage;
 
 import javax.swing.*;
@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class ProductFrameGen extends javax.swing.JFrame{
     /**
      *
-     * @throws SQLException
+     * throws SQLException
      */
     public ProductFrameGen(String guiName) throws SQLException {
         //region variable declaration
-        final Classes.Products products = new Classes.Products(guiName);
+        final ProductService products = new ProductService(guiName);
         ArrayList<JLabel> itemName = new ArrayList<>();
         ArrayList<JLabel> itemPrice = new ArrayList<>();
         ArrayList<JComboBox> itemQuantity = new ArrayList<>();
@@ -57,10 +57,9 @@ public class ProductFrameGen extends javax.swing.JFrame{
             itemPrice.get(i).setText(products.getProducts().get(i).getPriceFormatted());
             itemQuantity.add(new JComboBox());
             itemQuantity.get(i).setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
-            int finalI = i;
             itemQuantity.get(i).addItemListener(itemEvent -> {
                 if(itemEvent.getStateChange() == ItemEvent.SELECTED){
-                    Cart.currentPrice = Cart.calculatePrice(itemQuantity, products);
+                    Cart.currentPrice = Cart.calculatePrice(itemQuantity, products.getProducts());
                     cartTotalPrice.setText(Cart.currentPrice + "$");
                     System.out.println("The current price is: " + Cart.currentPrice);
                 }
@@ -133,7 +132,7 @@ public class ProductFrameGen extends javax.swing.JFrame{
     /**
      * Creates new form Clothes
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
     }
 
     /**

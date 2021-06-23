@@ -29,6 +29,7 @@ public class UserService {
             return new User(myResult.getInt("user_id"),
                     myResult.getString("first_name"),
                     myResult.getString("last_name"),
+                    myResult.getString("username"),
                     myResult.getString("email"),
                     password);
         }

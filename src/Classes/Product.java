@@ -18,18 +18,6 @@ public class Product {
         this.stock = stock;
         this.type = type;
     }
-
-    /**
-     *
-     * @param name
-     * @param price
-     * @param stock
-     */
-    public Product(String name, double price, int stock){
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-    }
     //endregion
     //region getter/setter
 
