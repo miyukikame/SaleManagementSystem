@@ -9,13 +9,12 @@ public class DBConnection {
     public static Connection connectDB()
     {
         try{
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/pe_2023", "root", "");
+            return DriverManager.getConnection("jdbc:mysql://localhost/pe_2023", "root", "");
         }
         catch(SQLException ex){
             System.out.println("Es konnte keine Verbindung zum Datenbank Server aufgebaut werden.");
             return null;
         }
     }
-
 
 }
