@@ -9,6 +9,7 @@ public class DBConnection {
     public static Connection connectDB()
     {
         try{
+            test;
             return DriverManager.getConnection("jdbc:mysql://localhost/pe_2023", "root", "");
         }
         catch(SQLException ex){
