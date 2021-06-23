@@ -9,8 +9,7 @@ public class DBConnection {
     public static Connection connectDB()
     {
         try{
-            test;
-            return DriverManager.getConnection("jdbc:mysql://localhost/pe_2023", "root", "");
+            return DriverManager.getConnection("jdbc:mysql://localhost/pe_2021", "root", "");
         }
         catch(SQLException ex){
             System.out.println("Es konnte keine Verbindung zum Datenbank Server aufgebaut werden.");
