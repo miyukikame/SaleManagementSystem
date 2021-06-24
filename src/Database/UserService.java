@@ -13,17 +13,24 @@ public class UserService {
     }
 
     public static void register(User user) throws SQLException {
-        String sql = "INSERT INTO USER(first_name,last_name,email,password)VALUES(?,?,?,?)";
+        String sql = "INSERT INTO USER(first_name,last_name,username,email,password)VALUES(?,?,?,?,?)";
         PreparedStatement statement = myConn.prepareStatement(sql);
         statement.setString(1,user.getFirstName());
         statement.setString(2,user.getLastName());
-        statement.setString(3,user.getEmail());
-        statement.setString(4,user.getPassword());
+        statement.setString(3,user.getUsername());
+        statement.setString(4,user.getEmail());
+        statement.setString(5,user.getPassword());
         statement.executeUpdate();
     }
     public static User login(String username, String password) throws SQLException{
         Statement myStatement = myConn.createStatement();
-        ResultSet myResult = myStatement.executeQuery("SELECT * FROM USER WHERE email = \""+ username + "\" AND password = \"" + password + "\"");
+        ResultSet myResult;
+        if(username.contains("@") && username.contains(".")){
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
+        }
+        else {
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
+        }
         if(myResult.next()) {
             JOptionPane.showMessageDialog(null, "Welcome User");
             return new User(myResult.getInt("user_id"),

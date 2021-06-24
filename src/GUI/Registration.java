@@ -12,8 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -51,7 +50,9 @@ public class Registration extends javax.swing.JFrame {
         user_lastname = new javax.swing.JTextField();
         javax.swing.JLabel jLabel_Firstname_Reg = new javax.swing.JLabel();
         javax.swing.JLabel jLabel_Lastname_Reg = new javax.swing.JLabel();
+        jLabel_Username_Reg = new javax.swing.JLabel();
         javax.swing.JLabel jLabel_Email_Reg = new javax.swing.JLabel();
+        user_username = new javax.swing.JTextField();
         user_email = new javax.swing.JTextField();
         javax.swing.JLabel jLabel_EmailConfirmation_Reg = new javax.swing.JLabel();
         javax.swing.JLabel jLabel_Password_Reg = new javax.swing.JLabel();
@@ -130,6 +131,9 @@ public class Registration extends javax.swing.JFrame {
 
         jLabel_Lastname_Reg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Lastname_Reg.setText("Lastname:");
+
+        jLabel_Username_Reg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_Username_Reg. setText("Username:");
 
         jLabel_Email_Reg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Email_Reg.setText("Email:");
@@ -216,11 +220,13 @@ public class Registration extends javax.swing.JFrame {
                                         .addComponent(jLabel_Email_Reg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel_Firstname_Reg, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel_Lastname_Reg, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel_Username_Reg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel_EmailConfirmation_Reg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(user_lastname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                                         .addComponent(user_firstname, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(user_username, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(user_email, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(user_emailconfirmation)
                                         .addComponent(user_password)
@@ -243,7 +249,9 @@ public class Registration extends javax.swing.JFrame {
                                         .addComponent(user_lastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel_Lastname_Reg))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_Username_Reg)
+                                        .addComponent(user_username, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel_Email_Reg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,6 +317,7 @@ public class Registration extends javax.swing.JFrame {
         User registration;
         String firstname = user_firstname.getText();
         String lastname = user_lastname.getText();
+        String username = user_username.getText();
         String email = user_email.getText();
         //String emailconfirmation=user_emailconfirmation.getText();
         String password=String.valueOf(user_password.getPassword());
@@ -342,7 +351,7 @@ public class Registration extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "E-mails doesn't match","Confirm e-mail",2);
         }*/
         else{
-            registration = new User(firstname, lastname, email, sb.toString());
+            registration = new User(firstname, lastname, username, email, sb.toString());
             UserService.register(registration);
             JOptionPane.showMessageDialog(null, "Account succesfully registered. Please login");
             Login lg = new Login();
@@ -396,7 +405,8 @@ public class Registration extends javax.swing.JFrame {
             }
         });
     }
-
+    private javax.swing.JLabel jLabel_Username_Reg;
+    private javax.swing.JTextField user_username;
     private javax.swing.JTextField user_email;
     private javax.swing.JTextField user_firstname;
     private javax.swing.JTextField user_lastname;
