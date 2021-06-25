@@ -1,13 +1,14 @@
 package Helper;
 
 import Classes.Product;
-
+import Classes.User;
 import javax.swing.*;
 import java.util.ArrayList;
 
 public final class Cart {
     public static ArrayList<Product> cartProducts = new ArrayList<>();
     public static ArrayList<Integer> cartProductQuantity = new ArrayList<>();
+    public static User user;
     public static float currentPrice = 0;
     public static float totalPrice = 0;
 

@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import Classes.User;
 import Database.UserService;
-
+import Helper.Cart;
 
 
 import java.awt.Color;
@@ -412,8 +412,8 @@ public class Login extends javax.swing.JFrame {
         }
 
         System.out.println(sb);
-        User user = UserService.login(jTextField_Username_Log.getText(), sb.toString());
-        if(user != null){
+        Cart.user = UserService.login(jTextField_Username_Log.getText(), sb.toString());
+        if(Cart.user != null){
             dispose();
             new Mainpage();
         }

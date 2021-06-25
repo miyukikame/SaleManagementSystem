@@ -43,7 +43,7 @@ public class Mainpage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
-        jButton2.setText("Eat");
+        jButton2.setText("Victuals");
         jButton2.addActionListener(actionEvent -> {
             dispose();
             ProductFrameGen victuals = null;
