@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Julia
+ *
  */
 public class Login extends javax.swing.JFrame {
     Connection conn = null;

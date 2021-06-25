@@ -41,7 +41,7 @@ public class Mainpage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 255));
+        jPanel2.setBackground(new java.awt.Color(231, 246, 255));
 
         jButton2.setText("Victuals");
         jButton2.addActionListener(actionEvent -> {

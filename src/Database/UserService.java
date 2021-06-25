@@ -5,6 +5,11 @@ import Classes.User;
 import javax.swing.*;
 import java.sql.*;
 
+import Classes.User;
+
+import javax.swing.*;
+import java.sql.*;
+
 public class UserService {
     static Connection myConn = DBConnection.connectDB();
 
@@ -47,3 +52,4 @@ public class UserService {
         }
     }
 }
+

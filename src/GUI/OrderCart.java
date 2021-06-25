@@ -61,7 +61,7 @@ public class OrderCart extends javax.swing.JFrame{
                 new OrderCart();
             });
         }
-        getContentPane().setBackground(Color.GREEN);
+        getContentPane().setBackground(new java.awt.Color(231, 246, 255));
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         getContentPane().setLayout(groupLayout);
         groupLayout.setAutoCreateGaps(true);

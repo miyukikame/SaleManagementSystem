@@ -34,7 +34,7 @@ public class OrderConfirmation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Backgroundcolor.setBackground(new java.awt.Color(0, 51, 255));
+        Backgroundcolor.setBackground(new java.awt.Color(231, 246, 255));
 
         ThankyouPanel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ThankyouPanel.setText("Thank you.Your order was succesful ");
