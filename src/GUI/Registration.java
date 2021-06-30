@@ -50,7 +50,7 @@ public class Registration extends javax.swing.JFrame {
         user_lastname = new javax.swing.JTextField();
         javax.swing.JLabel jLabel_Firstname_Reg = new javax.swing.JLabel();
         javax.swing.JLabel jLabel_Lastname_Reg = new javax.swing.JLabel();
-        jLabel_Username_Reg = new javax.swing.JLabel();
+        JLabel jLabel_Username_Reg = new JLabel();
         javax.swing.JLabel jLabel_Email_Reg = new javax.swing.JLabel();
         user_username = new javax.swing.JTextField();
         user_email = new javax.swing.JTextField();
@@ -62,9 +62,9 @@ public class Registration extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         javax.swing.JButton jButton_Cancel_Reg = new javax.swing.JButton();
         javax.swing.JLabel jLabelChangeToLogIn = new javax.swing.JLabel();
-        javax.swing.JTextField user_emailconfirmation = new javax.swing.JTextField();
+        user_emailconfirmation = new javax.swing.JTextField();
         user_password = new javax.swing.JPasswordField();
-        javax.swing.JPasswordField user_passwordconfirmation = new javax.swing.JPasswordField();
+        user_passwordconfirmation = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -119,12 +119,6 @@ public class Registration extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(231, 246, 255));
 
-        user_firstname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                user_firstnameActionPerformed(evt);
-            }
-        });
-
         jLabel_Firstname_Reg.setBackground(new java.awt.Color(0, 0, 0));
         jLabel_Firstname_Reg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Firstname_Reg.setText("Firstname:");
@@ -165,11 +159,7 @@ public class Registration extends javax.swing.JFrame {
 
         jButton_Cancel_Reg.setText("cancel");
         jButton_Cancel_Reg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Cancel_Reg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Cancel_RegActionPerformed(evt);
-            }
-        });
+        jButton_Cancel_Reg.addActionListener(evt -> jButton_Cancel_RegActionPerformed(evt));
 
         jLabelChangeToLogIn.setText("click here to log in");
         jLabelChangeToLogIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -290,10 +280,6 @@ public class Registration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void user_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_firstnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_user_firstnameActionPerformed
-
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         // TODO add your handling code here:
         System.exit(0);  //close the Registration window
@@ -319,9 +305,9 @@ public class Registration extends javax.swing.JFrame {
         String lastname = user_lastname.getText();
         String username = user_username.getText();
         String email = user_email.getText();
-        //String emailconfirmation=user_emailconfirmation.getText();
+        String emailconfirmation=user_emailconfirmation.getText();
         String password=String.valueOf(user_password.getPassword());
-        //String passwordconfirmation=String.valueOf(user_passwordconfirmation.getPassword());
+        String passwordconfirmation=String.valueOf(user_passwordconfirmation.getPassword());
 
         MessageDigest messagedigest = null; //Hash-Funktion Encryption
         try {
@@ -330,7 +316,7 @@ public class Registration extends javax.swing.JFrame {
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
         messagedigest.update(password.getBytes());
-        StringBuffer sb= new StringBuffer();
+        StringBuilder sb= new StringBuilder();
         byte[] b = messagedigest.digest();
         for(byte b1:b)
         {
@@ -338,18 +324,22 @@ public class Registration extends javax.swing.JFrame {
         }
 
 
-        if(firstname.equals("")||lastname.equals("")||email.equals("")/*||emailconfirmation.trim().equals(ema)||password.equals("")||passwordconfirmation.equals("")*/)
+        if(firstname.equals("")||lastname.equals("")||email.equals("")||emailconfirmation.equals("")||password.equals("")||passwordconfirmation.equals(""))
         {
             JOptionPane.showMessageDialog(null, "One or more fields are empty.");
         }
-        /*else if(!password.equals(passwordconfirmation))
+        else if(!password.equals(passwordconfirmation))
         {
             JOptionPane.showMessageDialog(null, "Passwords doesn't match","Confirm password",2);
         }
         else if(!email.equals(emailconfirmation))
         {
             JOptionPane.showMessageDialog(null, "E-mails doesn't match","Confirm e-mail",2);
-        }*/
+        }
+        else if(!email.contains("@") && !email.contains("."))
+        {
+            JOptionPane.showMessageDialog(null, "Use a valid e-mail","Invalid e-mail", 2);
+        }
         else{
             registration = new User(firstname, lastname, username, email, sb.toString());
             UserService.register(registration);
@@ -374,7 +364,7 @@ public class Registration extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -387,13 +377,7 @@ public class Registration extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -405,11 +389,15 @@ public class Registration extends javax.swing.JFrame {
             }
         });
     }
-    private javax.swing.JLabel jLabel_Username_Reg;
+
     private javax.swing.JTextField user_username;
     private javax.swing.JTextField user_email;
     private javax.swing.JTextField user_firstname;
     private javax.swing.JTextField user_lastname;
     private javax.swing.JPasswordField user_password;
-    // End of variables declaration//GEN-END:variables
-}
+    private javax.swing.JLabel jLabel_EmailConfirmation_Reg = new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel_Password_Reg = new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel_PasswordConfirmation_Reg = new javax.swing.JLabel();
+    private javax.swing.JTextField user_emailconfirmation = new javax.swing.JTextField();
+    private javax.swing.JPasswordField user_passwordconfirmation = new javax.swing.JPasswordField();
+}   

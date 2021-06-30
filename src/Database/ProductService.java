@@ -29,7 +29,7 @@ public class ProductService {
         ResultSet myResult = myStatement.executeQuery("select * from PRODUCT WHERE category_id = " + product_type);
         // Process the result
         while(myResult.next()){
-            products.add(new Product(myResult.getString("Name"),myResult.getDouble("Price"),myResult.getInt("Quantity"), myResult.getInt("category_id")));
+            products.add(new Product(myResult.getInt("product_id"), myResult.getString("Name"),myResult.getDouble("Price"),myResult.getInt("Quantity"), myResult.getInt("category_id")));
         }
     }
 
