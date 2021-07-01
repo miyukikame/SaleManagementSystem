@@ -33,10 +33,11 @@ public class Mainpage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +70,18 @@ public class Mainpage extends javax.swing.JFrame {
 
         jButton4.setText("Technology");
 
+
+        jButton5.setText("Account");
+        jButton5.addActionListener(actionEvent -> {
+            dispose();
+            Account account = null;
+            account = new Account();
+            account.setLocationRelativeTo(null);
+            account.setVisible(true);
+
+        });
+
+
         jButton1.setText("Go to your Cart");
         jButton1.addActionListener(actionEvent -> {
             dispose();
@@ -88,6 +101,7 @@ public class Mainpage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -98,6 +112,8 @@ public class Mainpage extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
+                    .addGap(2, 2, 2)
+                    .addComponent(jButton5)
                 .addGap(2, 2, 2)
                 .addComponent(jButton1)
                 .addGap(1, 1, 1)
@@ -184,6 +200,7 @@ public class Mainpage extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
