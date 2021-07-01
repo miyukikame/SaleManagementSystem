@@ -2,7 +2,7 @@ package Classes;
 public class Product {
     private String name;
     private double price;
-    private int stock,type;
+    private int id, stock,type;
     //region constructor
 
     /**
@@ -12,7 +12,8 @@ public class Product {
      * @param stock
      * @param type
      */
-    public Product(String name, double price, int stock, int type){
+    public Product(int id, String name, double price, int stock, int type){
+        this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
