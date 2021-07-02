@@ -7,6 +7,7 @@ package GUI;
 
 import Classes.User;
 import Database.UserService;
+import Helper.MailService;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -350,6 +351,8 @@ public class Registration extends javax.swing.JFrame {
             lg.setLocationRelativeTo(null);
             lg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
+            MailService testing = new MailService();
+            testing.sendEmail("Registration","You succesfully registered",registration.getEmail());
         }
 
 
