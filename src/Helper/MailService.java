@@ -93,7 +93,7 @@ public class MailService {
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(EMAIL_ADDRESS));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(Cart.user.getEmail()));
-            msg.setSubject("Thanks for the Order!");
+            msg.setSubject("Order confirmation");
             msg.setText(sb.toString());
             Transport.send(msg);
         } catch (MessagingException e) {
