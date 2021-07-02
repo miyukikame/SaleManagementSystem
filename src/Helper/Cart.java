@@ -42,4 +42,9 @@ public final class Cart {
         cartProducts.remove(index);
         cartProductQuantity.remove(index);
     }
+    public static void removeEverything(){
+        cartProducts = new ArrayList<>();
+        cartProductQuantity = new ArrayList<>();
+        totalPrice = 0;
+    }
 }

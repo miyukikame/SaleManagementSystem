@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Helper.Cart;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,9 +46,22 @@ public class OrderConfirmation extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12)); // NOI18N
         jButton1.setText("Go to mainpage");
+        jButton1.addActionListener(actionEvent -> {
+            dispose();
+            Mainpage main = new Mainpage();
+            main.setVisible(true);
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12)); // NOI18N
         jButton2.setText("Logout");
+        jButton2.addActionListener(actionEvent -> {
+            dispose();
+            Login login = new Login();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+            Cart.user = null;
+        });
+
 
         javax.swing.GroupLayout BackgroundcolorLayout = new javax.swing.GroupLayout(backgroundcolor);
         backgroundcolor.setLayout(BackgroundcolorLayout);

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import Classes.*;
 
+import javax.swing.*;
+
 public class ProductService {
     private final Connection myConn = DBConnection.connectDB();
     private ArrayList<Product> products = new ArrayList<>();
@@ -39,5 +41,21 @@ public class ProductService {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
+    }
+
+    public static int checkQuantity(Product product, int quantity) throws SQLException {
+        Connection myConn = DBConnection.connectDB();
+        Statement myStatement = myConn.createStatement();
+        ResultSet myResult = myStatement.executeQuery("select * from PRODUCT WHERE name = \"" + product.getName() + "\"");
+        // Process the result
+        while(myResult.next()){
+            if(myResult.getInt("quantity") - quantity < 0){
+                JOptionPane.showMessageDialog(null, "We currently only have "
+                        + myResult.getInt("quantity") + " " + myResult.getString("name") + " in our stock");
+                return myResult.getInt("quantity");
+            }
+        }
+        return quantity;
+
     }
 }

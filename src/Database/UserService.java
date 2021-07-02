@@ -1,6 +1,7 @@
 package Database;
 
 import Classes.User;
+import Helper.Cart;
 
 import javax.swing.*;
 import java.security.MessageDigest;
@@ -63,6 +64,20 @@ public class UserService {
             statement.executeUpdate();
         }
 
+    }
+    public static void updateUser(String city, String postcode, String address, String bankInformation){
+        String sql = "UPDATE USER SET street = ?, postcode = ?, city = ?, bank_information = ? WHERE user_id = ?";
+        try {
+            PreparedStatement statement = myConn.prepareStatement(sql);
+            statement.setString(1,(city));
+            statement.setString(2,(postcode));
+            statement.setString(3,(address));
+            statement.setString(4,(bankInformation));
+            statement.setInt(5, Cart.user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fehlernmeldung bei ShippingAdress order Button :"+e);
+        }
     }
 
     public static String hashPassword(String password){

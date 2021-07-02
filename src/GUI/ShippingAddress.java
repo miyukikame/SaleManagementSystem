@@ -1,6 +1,9 @@
 package GUI;
 import Database.DBConnection;
+import Database.OrderService;
+import Database.UserService;
 import Helper.Cart;
+import Helper.MailService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,21 +67,22 @@ public class ShippingAddress extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Street and Housenumber:");
 
-        jButton1.setText(" Order");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
+        jButton1.setText("Order");
+        jButton1.addActionListener(actionEvent -> {
+            MailService.createOrderMessage(Cart.user.getFirstName(), Cart.user.getLastName(), Cart.user.getUsername());
+            dispose();
+            OrderConfirmation orderConfirmation = new OrderConfirmation();
+            orderConfirmation.setVisible(true);
+            orderConfirmation.setLocationRelativeTo(null);
+            OrderService.InsertOrder();
+            OrderService.UpdateQuantity();
+            UserService.updateUser(jTextField3.getText(),jTextField4.getText(),jTextField5.getText(),jTextField6.getText());
+            Cart.removeEverything();
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Bank_information:");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -165,31 +169,13 @@ public class ShippingAddress extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql = "UPDATE USER SET street = ?, postcode = ?, city = ?, bank_information = ? WHERE user_id = ?";
-        Connection myConn = DBConnection.connectDB();
-        PreparedStatement statement = null;
-        try {
-            statement = myConn.prepareStatement(sql);
-            statement.setString(1,(jTextField3.getText()));
-            statement.setString(2,(jTextField4.getText()));
-            statement.setString(3,(jTextField5.getText()));
-            statement.setString(4,(jTextField6.getText()));
-            statement.setInt(5, Cart.user.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Fehlernmeldung bei ShippingAdress order Button :"+e);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    //GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
