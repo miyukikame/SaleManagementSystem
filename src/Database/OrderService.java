@@ -16,7 +16,7 @@ public class OrderService {
     private final static Connection myConn = DBConnection.connectDB();
     //INESRT ito ORDERS table attributes : user_id,order_date,total_price.
    static public void InsertOrder() {
-        String sql = "INSERT INTO ORDERS(user_id,order_date,total_price)VALUES(?,?,?)";
+        String sql = "INSERT INTO ORDERS (user_id,order_date,total_price)VALUES(?,?,?)";
         try {
             PreparedStatement  statement = myConn.prepareStatement(sql);
             statement.setInt(1, Cart.user.getId());
@@ -35,7 +35,7 @@ public class OrderService {
             try {
                 System.out.println(test.getStock());
                 System.out.println(Cart.cartProductQuantity.get(i));
-                String sql = "update product set quantity = ? where product_id = ?";
+                String sql = "update PRODUCT set quantity = ? where product_id = ?";
                 PreparedStatement statement = myConn.prepareStatement(sql);
                 statement.setInt(1, test.getStock() - Cart.cartProductQuantity.get(i));
                 statement.setInt(2, test.getId());

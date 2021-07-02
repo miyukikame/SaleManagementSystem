@@ -1,10 +1,14 @@
 package GUI;
 
 import java.sql.*;
+
 import Database.UserService;
 import Helper.Cart;
+
 import java.awt.Color;
+
 import static java.awt.Color.black;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.*;
@@ -12,7 +16,6 @@ import javax.swing.border.Border;
 
 
 /**
- *
  *
  */
 public class Login extends javax.swing.JFrame {
@@ -377,13 +380,13 @@ public class Login extends javax.swing.JFrame {
 
         System.out.println(sb);
         Cart.user = UserService.login(jTextField_Username_Log.getText(), sb.toString());
-        if(Cart.user != null){
+        if (Cart.user != null) {
             dispose();
             new Mainpage();
         }
 
 
-}//GEN-LAST:event_jButton_Login_LogActionPerformed
+    }//GEN-LAST:event_jButton_Login_LogActionPerformed
 
     private void jLabel_Exit_LogMouseClicked() {//GEN-FIRST:event_jLabel_Exit_LogMouseClicked
         System.exit(0); //close the Login window

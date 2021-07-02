@@ -166,7 +166,7 @@ public class ShippingAddress extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql = "UPDATE user SET street = ?, postcode = ?, city = ?, bank_information = ? WHERE user_id = ?";
+        String sql = "UPDATE USER SET street = ?, postcode = ?, city = ?, bank_information = ? WHERE user_id = ?";
         Connection myConn = DBConnection.connectDB();
         PreparedStatement statement = null;
         try {

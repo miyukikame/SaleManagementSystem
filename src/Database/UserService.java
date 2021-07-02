@@ -29,9 +29,9 @@ public class UserService {
         Statement myStatement = myConn.createStatement();
         ResultSet myResult;
         if (username.contains("@") && username.contains(".")) {
-            myResult = myStatement.executeQuery("SELECT * FROM user WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
         } else {
-            myResult = myStatement.executeQuery("SELECT * FROM user WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
         }
         if (myResult.next()) {
             JOptionPane.showMessageDialog(null, "Welcome User");

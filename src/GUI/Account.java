@@ -2,6 +2,7 @@ package GUI;
 
 import Database.UserService;
 import Helper.Cart;
+import Helper.ProductFrameGen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,10 +21,10 @@ public class Account extends javax.swing.JFrame{
         JLabel jLabel3 = new JLabel();
         JLabel jLabel4 = new JLabel();
         JLabel jLabel5 = new JLabel();
-        JTextField jTextField1 = new JTextField();
-        JTextField jTextField2 = new JTextField();
-        JTextField jTextField3 = new JTextField();
-        JTextField jTextField4 = new JTextField();
+        JLabel jTextField1 = new JLabel();
+        JLabel jTextField2 = new JLabel();
+        JLabel jTextField3 = new JLabel();
+        JLabel jTextField4 = new JLabel();
         JLabel jLabel6 = new JLabel();
         JLabel jLabel7 = new JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -31,6 +32,7 @@ public class Account extends javax.swing.JFrame{
         jPasswordField2 = new javax.swing.JPasswordField();
         // Variables declaration - do not modify
         JButton jButton1 = new JButton();
+        JButton jButton2 = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +86,14 @@ public class Account extends javax.swing.JFrame{
 
         });
 
+        jButton2.setText("Mainpage");
+        jButton2.addActionListener(actionEvent -> {
+            dispose();
+            Mainpage test = new Mainpage();
+            test.setVisible(true);
+        });
+
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,11 +123,12 @@ public class Account extends javax.swing.JFrame{
                                                                         .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                                                        .addComponent(jTextField1)
+                                                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING)))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup()
                                                                 .addGap(6, 6, 6)
-                                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -127,11 +138,11 @@ public class Account extends javax.swing.JFrame{
                                 .addComponent(jLabel1)
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE , javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE , javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE , javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -153,6 +164,7 @@ public class Account extends javax.swing.JFrame{
                                         .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)
+                                .addComponent(jButton2)
                                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
