@@ -1,4 +1,100 @@
 package Database;
 
-public class OrderService {
+import Classes.User;
+
+import javax.swing.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+
+import Classes.User;
+
+import javax.swing.*;
+import java.sql.*;
+
+public class UserService {
+    static Connection myConn = DBConnection.connectDB();
+
+    public UserService() {
+
+    }
+
+    public static void register(User user) throws SQLException {
+        String sql = "INSERT INTO USER(first_name,last_name,username,email,password)VALUES(?,?,?,?,?)";
+        PreparedStatement statement = myConn.prepareStatement(sql);
+        statement.setString(1, user.getFirstName());
+        statement.setString(2, user.getLastName());
+        statement.setString(3, user.getUsername());
+        statement.setString(4, user.getEmail());
+        statement.setString(5, user.getPassword());
+        statement.executeUpdate();
+    }
+
+    public static User login(String username, String password) throws SQLException {
+        Statement myStatement = myConn.createStatement();
+        ResultSet myResult;
+        if (username.contains("@") && username.contains(".")) {
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
+        } else {
+            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
+        }
+        if (myResult.next()) {
+            JOptionPane.showMessageDialog(null, "Welcome User");
+            return new User(myResult.getInt("user_id"),
+                    myResult.getString("first_name"),
+                    myResult.getString("last_name"),
+                    myResult.getString("username"),
+                    myResult.getString("email"),
+                    password);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Access denied", JOptionPane.ERROR_MESSAGE);
+
+            return null;
+        }
+    }
+
+    public static void changeInformation(int id,String oldPassword,String newPassword) throws SQLException {
+        Statement myStatement = myConn.createStatement();
+        ResultSet myResult;
+
+        MessageDigest messagedigest = null; //Hash-Funktion Encryption
+        try {
+            messagedigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException ex) {
+
+        }
+        messagedigest.update(oldPassword.getBytes());
+        StringBuffer sb= new StringBuffer();
+        byte[] b = messagedigest.digest();
+        for(byte b1:b)
+        {
+            sb.append(Integer.toHexString(b1 & 0xff).toString());//yeah
+        }
+        System.out.println(oldPassword);
+        System.out.println(sb.toString());
+        myResult = myStatement.executeQuery("SELECT * FROM USER WHERE password = \"" + sb.toString()+"\"");
+
+        messagedigest = null; //Hash-Funktion Encryption
+        try {
+            messagedigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException ex) {
+
+        }
+        messagedigest.update(newPassword.getBytes());
+        sb= new StringBuffer();
+        b = messagedigest.digest();
+        for(byte b1:b)
+        {
+            sb.append(Integer.toHexString(b1 & 0xff).toString());//yeah
+        }
+        if(myResult.next())
+        {
+          String sql=  "UPDATE `user` SET `password` = ? WHERE (`user_id` = ?)";
+            PreparedStatement statement = myConn.prepareStatement(sql);
+            statement.setString(1,sb.toString());
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        }
+
+    }
 }
