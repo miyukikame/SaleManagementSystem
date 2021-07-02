@@ -75,6 +75,11 @@ public class ShippingAddress extends javax.swing.JFrame {
             orderConfirmation.setVisible(true);
             orderConfirmation.setLocationRelativeTo(null);
             OrderService.InsertOrder();
+            try {
+                OrderService.addToTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             OrderService.UpdateQuantity();
             UserService.updateUser(jTextField3.getText(),jTextField4.getText(),jTextField5.getText(),jTextField6.getText());
             Cart.removeEverything();
