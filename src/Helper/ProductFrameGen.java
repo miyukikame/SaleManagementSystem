@@ -36,10 +36,10 @@ public class ProductFrameGen extends javax.swing.JFrame{
             System.out.println("Your total price is: " + Cart.totalPrice);
             JOptionPane.showMessageDialog(null, "Your products got added to the cart");
         });
-        itemSection.setFont(new java.awt.Font("Tahoma", 1, 18));
-        mainPage.setFont(new java.awt.Font("Tahoma", 1, 14));
-        cart.setFont(new java.awt.Font("Tahoma", 1, 14));
-        cartTotalPriceText.setFont(new java.awt.Font("Tahoma", 1, 14));
+        itemSection.setFont(new java.awt.Font("Tahoma", Font.BOLD, 18));
+        mainPage.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
+        cart.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
+        cartTotalPriceText.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
         cartTotalPrice.setEditable(false);
         cartTotalPrice.setText(Cart.currentPrice + "$");
         mainPage.addActionListener(actionEvent -> {
@@ -50,10 +50,10 @@ public class ProductFrameGen extends javax.swing.JFrame{
 
         for (int i = 0; i < products.getProducts().size(); i ++) {
             itemName.add(new JLabel());
-            itemName.get(i).setFont(new java.awt.Font("Tahoma", 1, 14));
+            itemName.get(i).setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
             itemName.get(i).setText(products.getProducts().get(i).getName());
             itemPrice.add(new JLabel());
-            itemPrice.get(i).setFont(new java.awt.Font("Tahoma", 1, 14));
+            itemPrice.get(i).setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
             itemPrice.get(i).setText(products.getProducts().get(i).getPriceFormatted());
             itemQuantity.add(new JComboBox());
             itemQuantity.get(i).setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));

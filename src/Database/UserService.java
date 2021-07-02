@@ -72,7 +72,7 @@ public class UserService {
         }
         System.out.println(oldPassword);
         System.out.println(sb.toString());
-        myResult = myStatement.executeQuery("SELECT * FROM user WHERE password = \"" + sb.toString()+"\"");
+        myResult = myStatement.executeQuery("SELECT * FROM USER WHERE password = \"" + sb.toString()+"\"");
 
         messagedigest = null; //Hash-Funktion Encryption
         try {

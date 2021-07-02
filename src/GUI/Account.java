@@ -3,9 +3,8 @@ package GUI;
 import Database.UserService;
 import Helper.Cart;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Account extends javax.swing.JFrame{
@@ -15,22 +14,23 @@ public class Account extends javax.swing.JFrame{
     private void initComponents() {
 
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        JPanel jPanel1 = new JPanel();
+        JLabel jLabel1 = new JLabel();
+        JLabel jLabel2 = new JLabel();
+        JLabel jLabel3 = new JLabel();
+        JLabel jLabel4 = new JLabel();
+        JLabel jLabel5 = new JLabel();
+        JTextField jTextField1 = new JTextField();
+        JTextField jTextField2 = new JTextField();
+        JTextField jTextField3 = new JTextField();
+        JTextField jTextField4 = new JTextField();
+        JLabel jLabel6 = new JLabel();
+        JLabel jLabel7 = new JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
+        JLabel jLabel8 = new JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        // Variables declaration - do not modify
+        JButton jButton1 = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,31 +59,20 @@ public class Account extends javax.swing.JFrame{
         jTextField3.setText(Cart.user.getUsername());
 
         jTextField4.setText(Cart.user.getEmail());
-        jTextField4.addActionListener(evt -> jTextField4ActionPerformed(evt));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14)); // NOI18N
         jLabel7.setText("Old Password");
 
         jPasswordField1.setText("");
-        jPasswordField1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jPasswordField1.setText(jPasswordField1.getText());
-            }
-        });
+        jPasswordField1.addActionListener(e -> jPasswordField1.setText(jPasswordField1.getText()));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14)); // NOI18N
         jLabel8.setText("New Password");
 
         jPasswordField2.setText("");
-        jPasswordField2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jPasswordField2.setText(jPasswordField2.getText());
-            }
-        });
+        jPasswordField2.addActionListener(e -> jPasswordField2.setText(jPasswordField2.getText()));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14)); // NOI18N
         jButton1.setText("Change Password");
         jButton1.addActionListener(e -> {
             try {
@@ -181,14 +170,10 @@ public class Account extends javax.swing.JFrame{
         pack();
     }// </editor-fold>
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -201,40 +186,15 @@ public class Account extends javax.swing.JFrame{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Account.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Account.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Account.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Account.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Account().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new Account().setVisible(true));
     }
 
-    // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
 }

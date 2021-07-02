@@ -22,22 +22,6 @@ public class MailService {
         session = Session.getInstance(properties, authenticator);
     }
 
-    private String createMessageBody(String firstname, String lastname, String username) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Thank you for your order");
-        sb.append(String.format("Firstname: %s \n", firstname));
-        sb.append(String.format("Lastname: %s \n", lastname));
-        sb.append(String.format("Username: %s \n", username));
-        for (Product P : Cart.cartProducts) {
-            sb.append(String.format("Product %s \n", P.getName()));
-            sb.append(String.format("Product %s \n", P.getPrice()));
-            sb.append(String.format("Totalprice $ %s \n", Cart.totalPrice));
-
-
-        }
-        return sb.toString();
-    }
-
     /**
      * Send an email to a list of recipients with a subject and a message using a gmail account as sender.
      *

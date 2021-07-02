@@ -44,27 +44,8 @@ public class User {
         return username;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
