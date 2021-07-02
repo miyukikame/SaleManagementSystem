@@ -7,11 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-import Classes.User;
-
-import javax.swing.*;
-import java.sql.*;
-
 public class UserService {
     static Connection myConn = DBConnection.connectDB();
 
@@ -34,9 +29,9 @@ public class UserService {
         Statement myStatement = myConn.createStatement();
         ResultSet myResult;
         if (username.contains("@") && username.contains(".")) {
-            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
+            myResult = myStatement.executeQuery("SELECT * FROM user WHERE email = \"" + username + "\" AND password = \"" + password + "\"");
         } else {
-            myResult = myStatement.executeQuery("SELECT * FROM USER WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
+            myResult = myStatement.executeQuery("SELECT * FROM user WHERE username = \"" + username + "\" AND password = \"" + password + "\"");
         }
         if (myResult.next()) {
             JOptionPane.showMessageDialog(null, "Welcome User");
@@ -53,49 +48,38 @@ public class UserService {
         }
     }
 
+
     public static void changeInformation(int id,String oldPassword,String newPassword) throws SQLException {
         Statement myStatement = myConn.createStatement();
-        ResultSet myResult;
+        ResultSet myResult = myStatement.executeQuery("SELECT * FROM USER WHERE password = \"" + hashPassword(oldPassword) +"\"");
 
+
+        if(myResult.next())
+        {
+          String sql=  "UPDATE `USER` SET `password` = ? WHERE (`user_id` = ?)";
+            PreparedStatement statement = myConn.prepareStatement(sql);
+            statement.setString(1,hashPassword(newPassword));
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        }
+
+    }
+
+    public static String hashPassword(String password){
         MessageDigest messagedigest = null; //Hash-Funktion Encryption
         try {
             messagedigest = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException ex) {
 
         }
-        messagedigest.update(oldPassword.getBytes());
+        messagedigest.update(password.getBytes());
         StringBuffer sb= new StringBuffer();
         byte[] b = messagedigest.digest();
         for(byte b1:b)
         {
             sb.append(Integer.toHexString(b1 & 0xff).toString());//yeah
         }
-        System.out.println(oldPassword);
-        System.out.println(sb.toString());
-        myResult = myStatement.executeQuery("SELECT * FROM USER WHERE password = \"" + sb.toString()+"\"");
-
-        messagedigest = null; //Hash-Funktion Encryption
-        try {
-            messagedigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException ex) {
-
-        }
-        messagedigest.update(newPassword.getBytes());
-        sb= new StringBuffer();
-        b = messagedigest.digest();
-        for(byte b1:b)
-        {
-            sb.append(Integer.toHexString(b1 & 0xff).toString());//yeah
-        }
-        if(myResult.next())
-        {
-          String sql=  "UPDATE `user` SET `password` = ? WHERE (`user_id` = ?)";
-            PreparedStatement statement = myConn.prepareStatement(sql);
-            statement.setString(1,sb.toString());
-            statement.setInt(2, id);
-            statement.executeUpdate();
-        }
-
+        return sb.toString();
     }
 }
 

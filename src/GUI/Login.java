@@ -372,21 +372,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton_Login_LogActionPerformed() throws SQLException {//GEN-FIRST:event_jButton_Login_LogActionPerformed
         //check if Username and password are correct
         // Connection conn = DatenbankHandler.getConnection();
-        String password = String.valueOf(jPasswordField_Password_Log.getPassword());
-        MessageDigest messagedigest = null; //Hash-Funktion Encryption
-        try {
-            messagedigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException ignored) {
+        String sb = UserService.hashPassword(String.valueOf(jPasswordField_Password_Log.getPassword()));
 
-        }
-        assert messagedigest != null;
-        messagedigest.update(password.getBytes());
-        StringBuffer sb= new StringBuffer();
-        byte[] b = messagedigest.digest();
-        for(byte b1:b)
-        {
-            sb.append(Integer.toHexString(b1 & 0xff));//yeah
-        }
 
         System.out.println(sb);
         Cart.user = UserService.login(jTextField_Username_Log.getText(), sb.toString());

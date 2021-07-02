@@ -23,6 +23,14 @@ public class Product {
     //region getter/setter
 
     /**
+     * returns the id
+     * @return id in int
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
      * returns the price
      * @return price in decimal
      */

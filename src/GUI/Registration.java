@@ -308,20 +308,7 @@ public class Registration extends javax.swing.JFrame {
         String password=String.valueOf(user_password.getPassword());
         String passwordconfirmation=String.valueOf(user_passwordconfirmation.getPassword());
 
-        MessageDigest messagedigest = null; //Hash-Funktion Encryption
-        try {
-            messagedigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        assert messagedigest != null;
-        messagedigest.update(password.getBytes());
-        StringBuilder sb= new StringBuilder();
-        byte[] b = messagedigest.digest();
-        for(byte b1:b)
-        {
-            sb.append(Integer.toHexString(b1 & 0xff));
-        }
+        String sb = UserService.hashPassword(password);
 
 
         if(firstname.equals("")||lastname.equals("")||email.equals("")||emailconfirmation.equals("")||password.equals("")||passwordconfirmation.equals(""))
