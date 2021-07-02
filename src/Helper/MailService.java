@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 public class MailService {
 
     private static final String EMAIL_ADDRESS = "java1234ap@gmail.com";
-    private static final String EMAIL_PASSWORD = "";
+    private static final String EMAIL_PASSWORD = "javajava";
     Session session;
 
     public MailService() {
