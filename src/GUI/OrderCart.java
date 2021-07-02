@@ -1,8 +1,10 @@
 package GUI;
 
 import Classes.Product;
+import Database.UserService;
 import Helper.Cart;
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderCart extends javax.swing.JFrame{
@@ -37,10 +39,20 @@ public class OrderCart extends javax.swing.JFrame{
             if(Cart.totalPrice == 0){
                 JOptionPane.showMessageDialog(null, "You don't have any products in your cart");
             }else {
-                dispose();
-                ShippingAddress shippingAddress = new ShippingAddress();
-                shippingAddress.setVisible(true);
-                shippingAddress.setLocationRelativeTo(null);
+                try {
+                    if(UserService.hasInfo(Cart.user.getId())){
+                        OrderConfirmation orderConfirmation = new OrderConfirmation();
+                        orderConfirmation.setVisible(true);
+                        orderConfirmation.setLocationRelativeTo(null);
+                    }
+                    else{
+                        ShippingAddress shippingAddress = new ShippingAddress();
+                        shippingAddress.setVisible(true);
+                        shippingAddress.setLocationRelativeTo(null);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         cartTotalPrice.setEditable(false);

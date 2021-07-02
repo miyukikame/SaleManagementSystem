@@ -79,6 +79,15 @@ public class UserService {
             System.out.println("Fehlernmeldung bei ShippingAdress order Button :"+e);
         }
     }
+    public static boolean hasInfo(int userId) throws SQLException {
+        Statement myStatement = myConn.createStatement();
+        ResultSet myResult = myStatement.executeQuery("SELECT * FROM USER WHERE user_id = "+ userId + " and street<>\"\" and postcode<>\"\"and  city<>\"\" and bank_information<>\"\"");
+        if(myResult.next()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public static String hashPassword(String password){
         MessageDigest messagedigest = null; //Hash-Funktion Encryption
