@@ -9,7 +9,7 @@ import javax.mail.internet.InternetAddress;
 
 public class MailService {
 
-    private static final String EMAIL_ADRESS = "";
+    private static final String EMAIL_ADDRESS = "java1234ap@gmail.com";
     private static final String EMAIL_PASSWORD = "";
     Session session;
 
@@ -31,7 +31,7 @@ public class MailService {
     public void sendEmail(String subject, String message, String userMail) {
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(EMAIL_ADRESS));
+            msg.setFrom(new InternetAddress(EMAIL_ADDRESS));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(userMail));
             msg.setSubject(subject);
             msg.setText(message);
@@ -50,7 +50,7 @@ public class MailService {
         return new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(EMAIL_ADRESS, EMAIL_PASSWORD);
+                return new PasswordAuthentication(EMAIL_ADDRESS, EMAIL_PASSWORD);
             }
         };
     }
@@ -71,7 +71,7 @@ public class MailService {
         return properties;
     }
 
-    public static String createOrderMessage(String firstname, String lastname,String username) {
+    public void createOrderMessage(String firstname, String lastname,String username) {
         int i = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("Thank you for your order\n");
@@ -88,7 +88,17 @@ public class MailService {
 
         }
         sb.append(String.format("Totalprice $ %s \n", Cart.totalPrice));
-        return sb.toString();
+
+        try {
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(EMAIL_ADDRESS));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(Cart.user.getEmail()));
+            msg.setSubject("Thanks for the Order!");
+            msg.setText(sb.toString());
+            Transport.send(msg);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

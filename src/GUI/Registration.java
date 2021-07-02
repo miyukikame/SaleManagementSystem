@@ -338,7 +338,7 @@ public class Registration extends javax.swing.JFrame {
             lg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
             MailService testing = new MailService();
-            testing.sendEmail("Registration","You succesfully registered",registration.getEmail());
+            testing.sendEmail("Registration","You are succesfully registered",registration.getEmail());
         }
 
 

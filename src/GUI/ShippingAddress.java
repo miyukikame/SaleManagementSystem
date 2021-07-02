@@ -69,7 +69,8 @@ public class ShippingAddress extends javax.swing.JFrame {
 
         jButton1.setText("Order");
         jButton1.addActionListener(actionEvent -> {
-            MailService.createOrderMessage(Cart.user.getFirstName(), Cart.user.getLastName(), Cart.user.getUsername());
+            MailService mailService = new MailService();
+            mailService.createOrderMessage(Cart.user.getFirstName(), Cart.user.getLastName(), Cart.user.getUsername());
             dispose();
             OrderConfirmation orderConfirmation = new OrderConfirmation();
             orderConfirmation.setVisible(true);
