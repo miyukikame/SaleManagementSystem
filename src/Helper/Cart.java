@@ -9,6 +9,7 @@ public final class Cart {
     public static ArrayList<Product> cartProducts = new ArrayList<>();
     public static ArrayList<Integer> cartProductQuantity = new ArrayList<>();
     public static User user;
+    public static int orderId = 0;
     public static float currentPrice = 0;
     public static float totalPrice = 0;
 
@@ -46,5 +47,6 @@ public final class Cart {
         cartProducts = new ArrayList<>();
         cartProductQuantity = new ArrayList<>();
         totalPrice = 0;
+        orderId = 0;
     }
 }
