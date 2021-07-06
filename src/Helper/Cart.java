@@ -29,6 +29,12 @@ public final class Cart {
         }
         return tempPrice;
     }
+
+    /**
+     * adds a new product to the cart
+     * @param product - products in the cart
+     * @param quantity - quantity of products in cart
+     */
     public static void addProductToCart(Product product, int quantity){
         if(cartProducts.stream().anyMatch(f -> f.getName().equalsIgnoreCase(product.getName()))) {
             int tempIndex = cartProducts.indexOf(cartProducts.stream().filter(f -> f.getName().equalsIgnoreCase(product.getName())).findFirst().get());
@@ -38,11 +44,20 @@ public final class Cart {
             cartProductQuantity.add(quantity);
         }
     }
+
+    /**
+     * removes one product from the cart
+     * @param index - the product position
+     */
     public static void removeProductFromCart(int index){
         totalPrice -= (float) (cartProducts.get(index).getPrice() * cartProductQuantity.get(index));
         cartProducts.remove(index);
         cartProductQuantity.remove(index);
     }
+
+    /**
+     * sets every variable back to zero
+     */
     public static void removeEverything(){
         cartProducts = new ArrayList<>();
         cartProductQuantity = new ArrayList<>();

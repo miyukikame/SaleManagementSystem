@@ -82,18 +82,14 @@ public class UserService {
     public static boolean hasInfo(int userId) throws SQLException {
         Statement myStatement = myConn.createStatement();
         ResultSet myResult = myStatement.executeQuery("SELECT * FROM USER WHERE user_id = "+ userId + " and street<>\"\" and postcode<>\"\"and  city<>\"\" and bank_information<>\"\"");
-        if(myResult.next()){
-            return true;
-        }else{
-            return false;
-        }
+        return myResult.next();
     }
 
     public static String hashPassword(String password){
         MessageDigest messagedigest = null; //Hash-Funktion Encryption
         try {
             messagedigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (NoSuchAlgorithmException ignored) {
 
         }
         messagedigest.update(password.getBytes());

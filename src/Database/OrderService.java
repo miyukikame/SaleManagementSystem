@@ -47,13 +47,15 @@ public class OrderService {
     }
     static public void addToTable() throws SQLException {
         String sql = "INSERT INTO ORDER_PRODUCT (order_id, product_id, quantity) VALUES (?,?,?);\n";
+        int i = 0;
         for (Product p :
                 Cart.cartProducts) {
                 PreparedStatement  statement = myConn.prepareStatement(sql);
                 statement.setInt(1, Cart.orderId);
                 statement.setInt(2, p.getId());
-                statement.setInt(3,p.getStock());
+                statement.setInt(3,Cart.cartProductQuantity.get(i));
                 statement.executeUpdate();
+                i++;
         }
     }
 

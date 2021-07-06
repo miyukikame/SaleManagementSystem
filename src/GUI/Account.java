@@ -2,7 +2,6 @@ package GUI;
 
 import Database.UserService;
 import Helper.Cart;
-import Helper.ProductFrameGen;
 
 import javax.swing.*;
 import java.awt.*;
