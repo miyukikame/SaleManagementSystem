@@ -1,8 +1,11 @@
 package GUI;
 
 import Classes.Product;
+import Database.OrderService;
 import Database.UserService;
 import Helper.Cart;
+import Helper.MailService;
+
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,11 +44,23 @@ public class OrderCart extends javax.swing.JFrame{
             }else {
                 try {
                     if(UserService.hasInfo(Cart.user.getId())){
+                        dispose();
+                        MailService mailService = new MailService();
+                        mailService.createOrderMessage(Cart.user.getFirstName(), Cart.user.getLastName(), Cart.user.getUsername());
                         OrderConfirmation orderConfirmation = new OrderConfirmation();
                         orderConfirmation.setVisible(true);
                         orderConfirmation.setLocationRelativeTo(null);
+                        OrderService.InsertOrder();
+                        try {
+                            OrderService.addToTable();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        OrderService.UpdateQuantity();
+                        Cart.removeEverything();
                     }
                     else{
+                        dispose();
                         ShippingAddress shippingAddress = new ShippingAddress();
                         shippingAddress.setVisible(true);
                         shippingAddress.setLocationRelativeTo(null);
